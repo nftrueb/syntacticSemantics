@@ -1,0 +1,6 @@
+ball
+computer
+pencil
+music
+hair
+building
