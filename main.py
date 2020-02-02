@@ -7,7 +7,7 @@ def noun():
 
 def verb():
     verb = verbs[random.randint(0,len(verbs)-1)]
-    verb += ' ' 
+    verb += ' '
     return verb
 
 def adj():
@@ -34,21 +34,28 @@ preps = []
 #populate word arrays
 for i in nounFile:
     nouns.append(i.replace('\n', ''))
+nounFile.close()
 
 for i in verbFile:
     verbs.append(i.replace('\n', ''))
+    print(verbs)
+verbFile.close()
 
 for i in adjFile:
     adjs.append(i.replace('\n', ''))
+adjFile.close()
 
 for i in prepFile:
     preps.append(i.replace('\n', ''))
+prepFile.close()
 
-
-sentence = "The " + adj() + noun() + verb() + prep() + "the " + adj() + noun()
-
-
-print(sentence)
+#make output file and generate sentences
+output = open("output.txt", "w+")
+for i in range(10):
+    sentence = "The " + adj() + noun() + verb() + prep() + "the " + adj() + noun() + '\n'
+    output.write(sentence)
+    print(sentence)
+output.close()
 
 
 
