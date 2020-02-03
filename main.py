@@ -1,44 +1,63 @@
+# ----------------------------------------------------------------
+#                   Syntactically Symantic
+#
+#   Original code development began on January 31, 2020
+#   Orginal author: Nicholas Trueb
+#
+#   This code is intended for use in learning the basics
+#   of python programming and computer logic by young students
+#   specifically those enrolled in the NSLC Engineering Program
+#
+#   Use of accompanied txt files provides a list of various
+#   types of words (nouns, verbs, adjectives, etc.) The program
+#   builds random sentences of varying complexity that follow
+#   the correct grammar rules of the English language, but
+#   themselves do not carry any actual meaning.
+#
+# ----------------------------------------------------------------
+
+
 import random
 
-def noun():
-    noun = nouns[random.randint(0,len(nouns)-1)]
-    noun += ' ' 
-    return noun
+# def word(type):
+# argument  -   type : integer indicating noun, verb, adj., etc.
+# return    -   word : word that has been randomly selected to be subbed
+#                      into the sentence that is being constructed
+#               -1   : if type is not within valid bounds
+#
+# The correct type of word is first selected by wordTypes[type]
+# A random integer index is generated to select a word of that type
+# A space is added to the end for continuity in the output
 
-def verb():
-    verb = verbs[random.randint(0,len(verbs)-1)]
-    verb += ' '
-    return verb
+def word(type):
+    if(type < 0 and type >= len(wordTypes)):
+        return -1
+ 
+    word = wordTypes[type][random.randint(0, len(wordTypes[type])-1)]
+    word += ' '
+    return word
 
-def adj():
-    adj = adjs[random.randint(0, len(adjs)-1)]
-    adj += ' ' 
-    return adj
-
-def prep():
-    prep = preps[random.randint(0, len(preps)-1)]
-    prep += ' ' 
-    return prep
-
-#open files to obtain words
+#open files in read-only mode to load words
 nounFile = open("nouns.txt",'r')
 verbFile = open("verbs.txt",'r')
 adjFile = open("adj.txt", 'r')
 prepFile = open("prepositions.txt", 'r')
 
-nouns = []
-verbs = []
-adjs = []
-preps = []
+nouns = [] #0
+verbs = [] #1
+adjs = []  #2
+preps = [] #3
 
-#populate word arrays
+wordTypes = [nouns, verbs, adjs, preps]
+
+#populate word arrays with all words from the files
+#close files after use
 for i in nounFile:
     nouns.append(i.replace('\n', ''))
 nounFile.close()
 
 for i in verbFile:
     verbs.append(i.replace('\n', ''))
-    print(verbs)
 verbFile.close()
 
 for i in adjFile:
@@ -52,7 +71,7 @@ prepFile.close()
 #make output file and generate sentences
 output = open("output.txt", "w+")
 for i in range(10):
-    sentence = "The " + adj() + noun() + verb() + prep() + "the " + adj() + noun() + '\n'
+    sentence = "The " + word(2) + word(0) + word(1) + word(3) + "the " + word(2) + word(0) + '\n'
     output.write(sentence)
     print(sentence)
 output.close()
