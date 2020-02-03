@@ -70,10 +70,15 @@ prepFile.close()
 
 #make output file and generate sentences
 output = open("output.txt", "w+")
-for i in range(10):
-    sentence = "The " + word(2) + word(0) + word(1) + word(3) + "the " + word(2) + word(0) + '\n'
-    output.write(sentence)
-    print(sentence)
+for _ in range(3):
+    paragraph = '   '
+    for i in range(10):
+        sentence = "The " + word(2) + word(0) + word(1) + word(3) + "the " + word(2) + word(0)
+        paragraph += sentence[:len(sentence)-1] + '. '
+        
+    print(paragraph)
+    print('')
+    output.write(paragraph + "\n\n")
 output.close()
 
 
